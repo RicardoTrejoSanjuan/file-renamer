@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WessCoby/file-renamer.git"
+    "url": "git+https://github.com/RicardoTrejoSanjuan/file-renamer.git"
   },
   "keywords": [
     "rename"
@@ -18,9 +18,9 @@
   "author": "WessCoby",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WessCoby/file-renamer/issues"
+    "url": "https://github.com/RicardoTrejoSanjuan/file-renamer/issues"
   },
-  "homepage": "https://github.com/WessCoby/file-renamer#readme",
+  "homepage": "https://github.com/RicardoTrejoSanjuan/file-renamer#readme",
   "dependencies": {
     "chalk": "^2.4.2"
   },

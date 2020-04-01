@@ -5,7 +5,7 @@ const path = require('path'),
 class RenameFiles {
     constructor() {
         this._dir = path.join(__dirname, 'files');         // Directory containing the files
-        this._files = fs.readdirSync(this._dir);                // Files in the directory
+        this._files = fs.readdirSync(this._dir);           // Files in the directory
         State.filesInDirectory = this._files.length;
         this._pattern = null;
         console.log(State.showInitialLog());

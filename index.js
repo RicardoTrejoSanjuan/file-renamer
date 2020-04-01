@@ -1,5 +1,4 @@
 const RenameFiles = require('./RenameFiles');
-
 const { log } = console; // Destructure the console object
 
 // RenameFiles is a singleton
