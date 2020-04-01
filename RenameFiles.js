@@ -4,7 +4,7 @@ const path = require('path'),
 
 class RenameFiles {
     constructor() {
-        this._dir = path.join(__dirname, 'Files');         // Directory containing the files
+        this._dir = path.join(__dirname, 'files');         // Directory containing the files
         this._files = fs.readdirSync(this._dir);                // Files in the directory
         State.filesInDirectory = this._files.length;
         this._pattern = null;
@@ -28,18 +28,20 @@ class RenameFiles {
         this._pattern = patternClass;
     }
 
-    shouldRename (file) {
-        if ( this.pattern.filePattern.test(file) ) {
-            State.matchedFiles++;
+
+    shouldRename2 (file) {
+        if(file.includes('Pantalla')){
             return file;
         }
     }
 
-    renameFile(file) {
-        let newName = this.pattern.rename(file);
+    renameFile2(file) {
         // Assign Extracted Info
-        const filePath = path.join(this.dir, file);
-        const newFilePath = path.join(this.dir, newName);
+        var name = file.split('Pantalla32');
+        var newName = name[0] + 'Pantalla' + name[1];
+        var filePath = path.join(this.dir, file);
+        var newFilePath = path.join(this.dir, newName);
+
         // Rename
         fs.rename(filePath, newFilePath, error => {
             if(error) {
@@ -51,25 +53,17 @@ class RenameFiles {
     }
 
     // Rename Files
-    exec(options = {}) {
-        // Check if use patterns option was passed. Then use specified pattern
-        if (options.usePattern) this.usePattern(options.usePattern);
-
+    exec() {
         // Return a Promise
         return new Promise((resolve, reject) => {
-            if( this.pattern === null ) {
-                State.logError({ message: "Pattern NOT Defined" });
+            try {
+                this.files
+                    .filter(file => this.shouldRename2(file))
+                    .forEach(file => this.renameFile2(file));
+                resolve( State.showCompletionLog() );
+            } catch (error) {
+                State.logError(error);
                 reject( State.showCompletionLog() );
-            } else {
-                try {
-                    this.files
-                        .filter(file => this.shouldRename(file))
-                        .forEach(file => this.renameFile(file));
-                    resolve( State.showCompletionLog() );
-                } catch (error) {
-                    State.logError(error);
-                    reject( State.showCompletionLog() );
-                }
             }
         });
     }
